@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    call_me_ruby (0.1.0)
+    call_me_ruby (1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -15,7 +15,7 @@ GEM
       slop (~> 3.6)
     coderay (1.1.0)
     columnize (0.9.0)
-    coveralls (0.7.3)
+    coveralls (0.7.8)
       multi_json (~> 1.10)
       rest-client (~> 1.7)
       simplecov (~> 0.9.1)
