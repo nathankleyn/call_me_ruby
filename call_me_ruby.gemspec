@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(File.join(__dir__, 'lib'))
 
 Gem::Specification.new do |gem|
   gem.name = 'call_me_ruby'
-  gem.version = '1.0.0'
+  gem.version = '1.0.1'
   gem.homepage = 'https://github.com/nathankleyn/call_me_ruby'
   gem.license = 'MIT'
 
