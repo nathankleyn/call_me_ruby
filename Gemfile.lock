@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    call_me_ruby (1.0.0)
+    call_me_ruby (1.0.2)
 
 GEM
   remote: https://rubygems.org/
