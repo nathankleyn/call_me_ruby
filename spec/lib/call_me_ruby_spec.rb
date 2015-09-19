@@ -18,19 +18,21 @@ RSpec.describe(CallMeRuby) do
 
   describe('.subscribe') do
     it('registers callbacks at the class level') do
-      subject.class.subscribe(:test, :success)
+      callback = Proc.new {}
+      subject.class.subscribe(:test, :success, :another_success, &callback)
 
-      expect(subject.class.class_callbacks).to eql(test: [:success])
+      expect(subject.class.class_callbacks).to eql(test: [:success, :another_success, callback])
       expect(subject.callbacks).to eql({})
     end
   end
 
   describe('#subscribe') do
     it('registers callbacks at the instance level') do
-      subject.subscribe(:test, :success)
+      callback = Proc.new {}
+      subject.subscribe(:test, :success, :another_success, &callback)
 
       expect(subject.class.class_callbacks).to eql({})
-      expect(subject.callbacks).to eql(test: [:success])
+      expect(subject.callbacks).to eql(test: [:success, :another_success, callback])
     end
   end
 
@@ -51,6 +53,16 @@ RSpec.describe(CallMeRuby) do
       subject.publish(:test)
     end
 
+    it('triggers callbacks given as blocks') do
+      block_called = false
+      callback = Proc.new { block_called = true }
+      subject.subscribe(:test, &callback)
+
+      subject.publish(:test)
+
+      expect(block_called).to be(true)
+    end
+
     it('returns true if all of the callbacks return true') do
       subject.class.subscribe(:test, :success)
       subject.subscribe(:test, :success)
@@ -65,11 +77,11 @@ RSpec.describe(CallMeRuby) do
       expect(subject.publish(:test)).to be(false)
     end
 
-    it('returns early when one of the callbacks fails') do
+    it('returns early when one of the callbacks returns false explicitly') do
       subject.class.subscribe(:test, :failure)
       subject.subscribe(:test, :success)
 
-      expect(subject).to receive(:failure)
+      expect(subject).to receive(:failure).and_return(false)
       expect(subject).to_not receive(:success)
 
       subject.publish(:test)

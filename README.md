@@ -32,12 +32,10 @@ class MyAmazingClass
 
   def will_succeed
     puts 'foo'
-    # If a callback returns a "truthy" value, than it's considered to have succeeded. However...
-    true
   end
 
-  def bar
-    # If a callback returns a "falsy" value, then no more callbacks will be called and publish will return false. If
+  def will_fail
+    # If a callback returns false, then no more callbacks will be called and publish will return false. If
     # all callbacks succeed, then publish will return true. Use this to make things fail fast as you need.
     false
   end
