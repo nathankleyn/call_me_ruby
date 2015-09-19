@@ -18,7 +18,7 @@ RSpec.describe(CallMeRuby) do
 
   describe('.subscribe') do
     it('registers callbacks at the class level') do
-      callback = Proc.new {}
+      callback = proc {}
       subject.class.subscribe(:test, :success, :another_success, &callback)
 
       expect(subject.class.class_callbacks).to eql(test: [:success, :another_success, callback])
@@ -28,7 +28,7 @@ RSpec.describe(CallMeRuby) do
 
   describe('#subscribe') do
     it('registers callbacks at the instance level') do
-      callback = Proc.new {}
+      callback = proc {}
       subject.subscribe(:test, :success, :another_success, &callback)
 
       expect(subject.class.class_callbacks).to eql({})
@@ -55,7 +55,7 @@ RSpec.describe(CallMeRuby) do
 
     it('triggers callbacks given as blocks') do
       block_called = false
-      callback = Proc.new { block_called = true }
+      callback = proc { block_called = true }
       subject.subscribe(:test, &callback)
 
       subject.publish(:test)

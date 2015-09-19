@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(File.join(__dir__, 'lib'))
 
 Gem::Specification.new do |gem|
   gem.name = 'call_me_ruby'
-  gem.version = '1.0.2'
+  gem.version = '1.1.0'
   gem.homepage = 'https://github.com/nathankleyn/call_me_ruby'
   gem.license = 'MIT'
 
@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.summary = 'Simple, declarative, ActiveModel style callbacks (aka hooks or events) in Ruby!'
   gem.description = "See #{gem.homepage} for more information!"
 
-  gem.files = Dir['**/*'].select { |d| d =~ /^(README.md|lib\/)/ }
+  gem.files = Dir['**/*'].select { |d| d =~ %r{^(README.md|lib/)} }
 
   gem.add_development_dependency 'coveralls', '~> 0.7'
   gem.add_development_dependency 'filewatcher', '~> 0.3'
