@@ -47,4 +47,8 @@ module CallMeRuby
 
     true
   end
+
+  def subscribed?(name)
+    self.class.class_callbacks.include?(name) || callbacks.include?(name)
+  end
 end

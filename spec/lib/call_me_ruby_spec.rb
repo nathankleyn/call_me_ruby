@@ -87,4 +87,22 @@ RSpec.describe(CallMeRuby) do
       subject.publish(:test)
     end
   end
+
+  describe('#subscribed?') do
+    it('returns true if an event is subscribed at the class level with the given name') do
+      subject.class.subscribe(:class_event, :success)
+
+      expect(subject.subscribed?(:class_event)).to be(true)
+    end
+
+    it('returns true if an event is subscribed at the instance level with the given name') do
+      subject.subscribe(:instance_event, :success)
+
+      expect(subject.subscribed?(:instance_event)).to be(true)
+    end
+
+    it('returns false if no events are subscribed with the given name') do
+      expect(subject.subscribed?(:failure)).to be(false)
+    end
+  end
 end
