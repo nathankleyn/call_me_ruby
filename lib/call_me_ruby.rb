@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A mixin to implement publish/subscribe style callbacks in the class that
 # includes this.
 module CallMeRuby
